@@ -1,0 +1,5 @@
+Isla Huar;Calbuco;1200
+Lago Todos los Santos;Puerto Varas;1500
+Volcán Osorno;Puerto Varas;2000
+Frutillar;Frutillar;900
+Cochamó;Cochamó;1800
