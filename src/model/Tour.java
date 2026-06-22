@@ -10,7 +10,13 @@ public class Tour {
     public Tour(String nombre, String ciudad, int precio) {
         this.nombre = nombre;
         this.ciudad = ciudad;
-        this.precio = precio;
+
+        if (precio < 0) {
+            System.out.println("Precio inválido, se asigna 0");
+            this.precio = 0;
+        } else {
+            this.precio = precio;
+        }
     }
 
     // Getters
@@ -36,16 +42,17 @@ public class Tour {
     }
 
     public void setPrecio(int precio) {
-        this.precio = precio;
+        if (precio < 0) {
+            System.out.println("Precio inválido");
+        } else {
+            this.precio = precio;
+        }
     }
 
-    // toString
     @Override
     public String toString() {
-        return "Tour{" +
-                "nombre='" + nombre + '\'' +
-                ", ciudad='" + ciudad + '\'' +
-                ", precio=" + precio +
-                '}';
+        return "Nombre: " + nombre +
+                " | Ciudad: " + ciudad +
+                " | Precio: " + precio;
     }
 }

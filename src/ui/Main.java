@@ -12,19 +12,19 @@ public class Main {
         // Crear gestor
         GestorDatos gestor = new GestorDatos();
 
-        // Cargar datos desde archivo
+        // Cargar datos
         gestor.cargarDatos();
 
-        // Obtener lista de tours
+        // Obtener lista
         ArrayList<Tour> lista = gestor.getListaTours();
 
-        // ✅ 1. Mostrar todos los tours
+        // Mostrar todos
         System.out.println("=== LISTA DE TOURS ===");
         for (Tour t : lista) {
             System.out.println(t);
         }
 
-        // ✅ 2. Filtrar (precio > 1000)
+        // Filtro precio
         System.out.println("\n=== TOURS CON PRECIO > 1000 ===");
 
         boolean encontrado = false;
@@ -38,6 +38,22 @@ public class Main {
 
         if (!encontrado) {
             System.out.println("No se encontraron tours.");
+        }
+
+        // 🔥 EXTRA: búsqueda por nombre
+        System.out.println("\n=== BÚSQUEDA POR NOMBRE 'Lago' ===");
+
+        boolean encontradoNombre = false;
+
+        for (Tour t3 : lista) {
+            if (t3.getNombre().toLowerCase().contains("lago")) {
+                System.out.println(t3);
+                encontradoNombre = true;
+            }
+        }
+
+        if (!encontradoNombre) {
+            System.out.println("No se encontraron resultados.");
         }
     }
 }
