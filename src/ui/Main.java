@@ -40,7 +40,6 @@ public class Main {
             System.out.println("No se encontraron tours.");
         }
 
-        // 🔥 EXTRA: búsqueda por nombre
         System.out.println("\n=== BÚSQUEDA POR NOMBRE 'Lago' ===");
 
         boolean encontradoNombre = false;
