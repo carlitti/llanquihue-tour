@@ -10,7 +10,10 @@ public class RutaGastronomica extends ServicioTuristico {
     }
 
     @Override
-    public String toString() {
-        return super.toString() + " | Paradas: " + numeroDeParadas;
+    public void mostrarInformacion() {
+        System.out.println(
+                "Ruta Gastronómica: " + nombre +
+                        " | Duración: " + duracionHoras +
+                        " horas | Paradas: " + numeroDeParadas);
     }
 }
