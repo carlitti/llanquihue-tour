@@ -1,38 +1,63 @@
 # LlanquihueTourApp
 
 ## Descripción
-Aplicación en Java que implementa una jerarquía de clases utilizando herencia para representar distintos tipos de servicios turísticos.
 
-## Objetivo
-Aplicar programación orientada a objetos mediante la creación de una superclase y subclases que extienden su funcionalidad.
+Aplicación desarrollada en Java para la agencia turística Llanquihue Tour.
+
+En esta versión se implementa una jerarquía de clases utilizando herencia, sobrescritura de métodos y polimorfismo. Además, los servicios turísticos son almacenados en una colección genérica y recorridos dinámicamente mediante referencias de la superclase.
+
+## Funcionalidades implementadas
+
+- Clase base `ServicioTuristico`.
+- Subclases:
+  - `RutaGastronomica`
+  - `PaseoLacustre`
+  - `ExcursionCultural`
+- Sobrescritura del método `mostrarInformacion()`.
+- Uso de polimorfismo para mostrar información de distintos tipos de servicios.
+- Uso de colección genérica `List<ServicioTuristico>`.
+- Recorrido de la colección mediante un ciclo `for-each`.
 
 ## Estructura del proyecto
 
-- model:
-  - ServicioTuristico (superclase)
-  - RutaGastronomica
-  - PaseoLacustre
-  - ExcursionCultural
+### model
 
-- data:
-  - GestorServicios (crea y muestra objetos de prueba)
+Contiene las clases del modelo:
 
-- ui:
-  - Main (ejecuta el programa)
+- ServicioTuristico
+- RutaGastronomica
+- PaseoLacustre
+- ExcursionCultural
+
+### data
+
+Contiene la clase:
+
+- GestorServicios
+
+### ui
+
+Contiene la clase principal:
+
+- Main
 
 ## Ejecución
 
-1. Abrir el proyecto en IntelliJ IDEA
-2. Ejecutar la clase Main
-3. Visualizar los servicios turísticos en la consola
+1. Abrir el proyecto en IntelliJ IDEA.
+2. Compilar el proyecto.
+3. Ejecutar la clase `Main`.
+4. Visualizar la información de los servicios turísticos en la consola.
 
-## Clases creadas
+## Conceptos aplicados
 
-- ServicioTuristico: contiene atributos comunes (nombre y duración)
-- RutaGastronomica: agrega número de paradas
-- PaseoLacustre: agrega tipo de embarcación
-- ExcursionCultural: agrega lugar histórico
+- Programación Orientada a Objetos
+- Herencia
+- Polimorfismo
+- Sobrescritura de métodos
+- Colecciones genéricas (`List`)
+- Encapsulamiento
 
 ## Autor
-Carlos Felipe Gonzalez Cereceda
-``
+
+Carlos Felipe González Cereceda
+`
