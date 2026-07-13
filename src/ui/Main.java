@@ -1,15 +1,212 @@
 package ui;
 
-import data.GestorServicios;
+import data.GestorEntidades;
+import model.*;
+
+import javax.swing.JOptionPane;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        GestorServicios gestor = new GestorServicios();
+        GestorEntidades gestor = new GestorEntidades();
 
-        System.out.println("=== SERVICIOS TURÍSTICOS LLANQUIHUE TOUR ===");
+        int opcion;
 
-        gestor.mostrarServicios();
+        do {
+
+            try {
+
+                opcion = Integer.parseInt(
+                        JOptionPane.showInputDialog(
+                                """
+                                LLANQUIHUE TOUR
+
+                                1. Agregar Guía
+                                2. Agregar Vehículo
+                                3. Agregar Excursión Cultural
+                                4. Mostrar Registros
+                                5. Salir
+                                """
+                        )
+                );
+
+            } catch (NumberFormatException e) {
+
+                JOptionPane.showMessageDialog(
+                        null,
+                        "Debe ingresar una opción válida."
+                );
+
+                opcion = 0;
+            }
+
+            switch (opcion) {
+
+                case 1:
+
+                    String nombre =
+                            JOptionPane.showInputDialog(
+                                    "Nombre del guía:"
+                            );
+
+                    String idioma =
+                            JOptionPane.showInputDialog(
+                                    "Idioma del guía:"
+                            );
+
+                    gestor.agregarEntidad(
+                            new GuiaTuristico(
+                                    nombre,
+                                    idioma
+                            )
+                    );
+
+                    JOptionPane.showMessageDialog(
+                            null,
+                            "Guía agregado correctamente."
+                    );
+
+                    break;
+
+                case 2:
+
+                    String patente =
+                            JOptionPane.showInputDialog(
+                                    "Patente del vehículo:"
+                            );
+
+                    int capacidad = 0;
+                    boolean datoValido = false;
+
+                    while (!datoValido) {
+
+                        try {
+
+                            capacidad = Integer.parseInt(
+                                    JOptionPane.showInputDialog(
+                                            "Capacidad del vehículo:"
+                                    )
+                            );
+
+                            datoValido = true;
+
+                        } catch (NumberFormatException e) {
+
+                            JOptionPane.showMessageDialog(
+                                    null,
+                                    "Debe ingresar solamente números."
+                            );
+                        }
+                    }
+
+                    gestor.agregarEntidad(
+                            new Vehiculo(
+                                    patente,
+                                    capacidad
+                            )
+                    );
+
+                    JOptionPane.showMessageDialog(
+                            null,
+                            "Vehículo agregado correctamente."
+                    );
+
+                    break;
+
+                case 3:
+
+                    String nombreExcursion =
+                            JOptionPane.showInputDialog(
+                                    "Nombre de la excursión:"
+                            );
+
+                    int duracion = 0;
+                    boolean duracionValida = false;
+
+                    while (!duracionValida) {
+
+                        try {
+
+                            duracion = Integer.parseInt(
+                                    JOptionPane.showInputDialog(
+                                            "Duración en horas:"
+                                    )
+                            );
+
+                            duracionValida = true;
+
+                        } catch (NumberFormatException e) {
+
+                            JOptionPane.showMessageDialog(
+                                    null,
+                                    "Debe ingresar solamente números."
+                            );
+                        }
+                    }
+
+                    String lugar =
+                            JOptionPane.showInputDialog(
+                                    "Lugar histórico:"
+                            );
+
+                    gestor.agregarEntidad(
+                            new ExcursionCultural(
+                                    nombreExcursion,
+                                    duracion,
+                                    lugar
+                            )
+                    );
+
+                    JOptionPane.showMessageDialog(
+                            null,
+                            "Excursión agregada correctamente."
+                    );
+
+                    break;
+
+                case 4:
+
+                    String resultado =
+                            gestor.mostrarEntidades();
+
+                    if (resultado.isEmpty()) {
+
+                        JOptionPane.showMessageDialog(
+                                null,
+                                "No existen registros."
+                        );
+
+                    } else {
+
+                        JOptionPane.showMessageDialog(
+                                null,
+                                resultado
+                        );
+                    }
+
+                    break;
+
+                case 5:
+
+                    JOptionPane.showMessageDialog(
+                            null,
+                            "Programa finalizado."
+                    );
+
+                    break;
+
+                default:
+
+                    if (opcion != 0) {
+
+                        JOptionPane.showMessageDialog(
+                                null,
+                                "Opción no válida."
+                        );
+                    }
+            }
+
+        } while (opcion != 5);
     }
 }

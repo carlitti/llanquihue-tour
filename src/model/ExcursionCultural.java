@@ -10,10 +10,12 @@ public class ExcursionCultural extends ServicioTuristico {
     }
 
     @Override
-    public void mostrarInformacion() {
-        System.out.println(
-                "Excursión Cultural: " + nombre +
-                        " | Duración: " + duracionHoras +
-                        " horas | Lugar: " + lugarHistorico);
+    public String mostrarResumen() {
+        return "Excursión Cultural: " +
+                nombre +
+                " | Duración: " +
+                duracionHoras +
+                " horas | Lugar: " +
+                lugarHistorico;
     }
 }

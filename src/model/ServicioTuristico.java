@@ -1,6 +1,6 @@
 package model;
 
-public class ServicioTuristico {
+public abstract class ServicioTuristico implements Registrable {
 
     protected String nombre;
     protected int duracionHoras;
@@ -10,9 +10,5 @@ public class ServicioTuristico {
         this.duracionHoras = duracionHoras;
     }
 
-    public void mostrarInformacion() {
-        System.out.println(
-                "Nombre: " + nombre +
-                        " | Duración: " + duracionHoras + " horas");
-    }
+    public abstract String mostrarResumen();
 }
