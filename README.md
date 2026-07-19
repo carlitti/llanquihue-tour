@@ -1,19 +1,21 @@
 # LlanquihueTourApp
 
-## Descripción
+## Descripción General
 
-LlanquihueTourApp es una aplicación desarrollada en Java para gestionar distintas entidades relacionadas con una agencia de turismo.
+LlanquihueTourApp es una aplicación desarrollada en Java para apoyar la gestión de una agencia de turismo mediante la aplicación de los principios de Programación Orientada a Objetos.
 
-Durante el desarrollo del proyecto se aplicaron conceptos fundamentales de Programación Orientada a Objetos, tales como:
+El sistema permite administrar distintas entidades relacionadas con la agencia, como clientes, guías turísticos, vehículos y servicios turísticos. Además, incorpora lectura de datos desde archivos de texto, uso de colecciones, herencia, polimorfismo e interfaces.
 
-- Interfaces
-- Herencia
-- Polimorfismo
-- Colecciones genéricas
-- Uso de instanceof
-- Interfaz gráfica con JOptionPane
+---
 
-El sistema permite registrar y visualizar distintas entidades de la agencia turística mediante una interfaz gráfica simple.
+## Objetivos del Proyecto
+
+- Modelar entidades del dominio turístico mediante clases Java.
+- Aplicar los principios de Programación Orientada a Objetos.
+- Utilizar herencia, composición e interfaces.
+- Gestionar colecciones de objetos mediante ArrayList.
+- Leer información desde archivos de texto.
+- Implementar una interfaz gráfica sencilla utilizando JOptionPane.
 
 ---
 
@@ -21,19 +23,32 @@ El sistema permite registrar y visualizar distintas entidades de la agencia tur�
 
 ```text
 src
+│
 ├── model
 │   ├── Registrable.java
+│   ├── Persona.java
+│   ├── Cliente.java
+│   ├── Proveedor.java
+│   ├── GuiaTuristico.java
+│   ├── Direccion.java
+│   ├── RutInvalidoException.java
 │   ├── ServicioTuristico.java
 │   ├── ExcursionCultural.java
 │   ├── PaseoLacustre.java
 │   ├── RutaGastronomica.java
-│   ├── GuiaTuristico.java
 │   ├── Vehiculo.java
 │   └── ColaboradorExterno.java
 │
 ├── data
-│   ├── GestorServicios.java
-│   └── GestorEntidades.java
+│   ├── GestorEntidades.java
+│   └── GestorServicios.java
+│
+├── utils
+│   ├── LectorClientes.java
+│   └── ValidadorRut.java
+│
+├── resources
+│   └── clientes.txt
 │
 └── ui
     └── Main.java
@@ -41,82 +56,25 @@ src
 
 ---
 
-## Clases e Interfaces Utilizadas
+## Principios de Programación Orientada a Objetos Aplicados
 
-### Interfaz Registrable
+### Encapsulamiento
 
-La interfaz Registrable define un comportamiento común para todas las entidades que pueden ser gestionadas por el sistema.
+Los atributos de las clases fueron declarados como privados y se accede a ellos mediante getters y setters.
 
-Método implementado:
+### Herencia
 
-```java
-String mostrarResumen();
+Se implementó la siguiente jerarquía de clases:
+
+```text
+Persona
+│
+├── Cliente
+├── GuiaTuristico
+└── Proveedor
 ```
 
----
-
-### Clase ServicioTuristico
-
-ServicioTuristico es una clase abstracta que representa la base de los servicios ofrecidos por la agencia.
-
-Atributos:
-
-```java
-protected String nombre;
-protected int duracionHoras;
-```
-
----
-
-### Subclases de ServicioTuristico
-
-#### ExcursionCultural
-
-Representa excursiones a lugares de interés histórico o cultural.
-
-#### PaseoLacustre
-
-Representa paseos turísticos realizados en embarcaciones.
-
-#### RutaGastronomica
-
-Representa rutas gastronómicas con diferentes paradas.
-
----
-
-### Otras Entidades
-
-#### GuiaTuristico
-
-Representa a un guía turístico de la empresa.
-
-#### Vehiculo
-
-Representa un vehículo utilizado para el transporte de turistas.
-
-#### ColaboradorExterno
-
-Representa colaboradores o empresas externas asociadas a la agencia.
-
----
-
-## Funcionalidades del Sistema
-
-El sistema permite:
-
-- Registrar guías turísticos.
-- Registrar vehículos.
-- Registrar excursiones culturales.
-- Almacenar objetos de distintos tipos en una misma colección.
-- Mostrar información utilizando polimorfismo.
-- Diferenciar entidades mediante instanceof.
-- Visualizar registros mediante una interfaz gráfica construida con JOptionPane.
-
----
-
-## Herencia
-
-Se implementó la siguiente jerarquía:
+Además:
 
 ```text
 ServicioTuristico
@@ -126,29 +84,98 @@ ServicioTuristico
 └── RutaGastronomica
 ```
 
----
+### Composición
 
-## Polimorfismo
+La clase Persona contiene un objeto Direccion.
 
-El sistema utiliza una colección genérica:
+```java
+private Direccion direccion;
+```
+
+### Interfaces
+
+Se creó la interfaz Registrable para definir un comportamiento común entre distintas entidades.
+
+```java
+String mostrarResumen();
+```
+
+### Polimorfismo
+
+Se utiliza una colección polimórfica:
 
 ```java
 ArrayList<Registrable>
 ```
 
-Esto permite almacenar distintos tipos de objetos dentro de una misma colección y acceder a ellos mediante una interfaz común.
+permitiendo almacenar objetos de distintos tipos dentro de la misma colección.
+
+### instanceof
+
+Se utiliza el operador instanceof para reconocer el tipo de entidad almacenada y aplicar lógica específica cuando corresponde.
 
 ---
 
-## Uso de instanceof
+## Gestión de Colecciones
 
-Se utiliza el operador instanceof para identificar el tipo específico de entidad almacenada y aplicar lógica diferenciada.
+El sistema utiliza estructuras dinámicas de tipo ArrayList para almacenar:
 
-Ejemplo:
+- Clientes
+- Guías turísticos
+- Vehículos
+- Servicios turísticos
+
+Permitendo agregar, recorrer y visualizar información de forma eficiente.
+
+---
+
+## Lectura de Archivos
+
+El sistema incluye lectura de información desde archivos de texto.
+
+Archivo de ejemplo:
+
+```text
+clientes.txt
+```
+
+Formato:
+
+```text
+Nombre;Rut;Calle;Comuna
+```
+
+La clase:
 
 ```java
-if (entidad instanceof GuiaTuristico)
+LectorClientes
 ```
+
+se encarga de leer el archivo y convertir cada línea en objetos Cliente.
+
+---
+
+## Validación y Excepciones
+
+Se implementó una excepción personalizada:
+
+```java
+RutInvalidoException
+```
+
+utilizada para validar el formato de los RUT ingresados en el sistema.
+
+---
+
+## Funcionalidades Implementadas
+
+- Registrar guías turísticos.
+- Registrar vehículos.
+- Registrar excursiones culturales.
+- Cargar clientes desde archivo TXT.
+- Mostrar registros almacenados.
+- Gestionar múltiples tipos de entidades mediante polimorfismo.
+- Validar datos mediante excepciones personalizadas.
 
 ---
 
@@ -159,28 +186,9 @@ if (entidad instanceof GuiaTuristico)
 2. Agregar Vehículo
 3. Agregar Excursión Cultural
 4. Mostrar Registros
-5. Salir
+5. Cargar Clientes desde TXT
+6. Salir
 ```
-
----
-
-## Cómo Ejecutar
-
-1. Clonar el repositorio.
-
-```bash
-git clone https://github.com/carlitti/llanquihue-tour.git
-```
-
-2. Abrir el proyecto en IntelliJ IDEA.
-
-3. Ejecutar la clase:
-
-```java
-ui.Main
-```
-
-4. Utilizar las opciones del menú para registrar y visualizar entidades.
 
 ---
 
@@ -191,6 +199,33 @@ ui.Main
 - Git
 - GitHub
 - JOptionPane
+- Archivos de texto (.txt)
+
+---
+
+## Instrucciones de Ejecución
+
+1. Clonar el repositorio:
+
+```bash
+git clone https://github.com/carlitti/llanquihue-tour.git
+```
+
+2. Abrir el proyecto en IntelliJ IDEA.
+
+3. Verificar que exista el archivo:
+
+```text
+src/resources/clientes.txt
+```
+
+4. Ejecutar la clase:
+
+```java
+ui.Main
+```
+
+5. Utilizar el menú para interactuar con el sistema.
 
 ---
 
