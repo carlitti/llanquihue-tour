@@ -2,8 +2,10 @@ package ui;
 
 import data.GestorEntidades;
 import model.*;
+import utils.LectorClientes;
 
 import javax.swing.JOptionPane;
+import java.util.ArrayList;
 
 public class Main {
 
@@ -21,12 +23,13 @@ public class Main {
                         JOptionPane.showInputDialog(
                                 """
                                 LLANQUIHUE TOUR
-
+                                
                                 1. Agregar Guía
                                 2. Agregar Vehículo
                                 3. Agregar Excursión Cultural
                                 4. Mostrar Registros
-                                5. Salir
+                                5. Cargar Clientes desde TXT
+                                6. Salir
                                 """
                         )
                 );
@@ -50,14 +53,37 @@ public class Main {
                                     "Nombre del guía:"
                             );
 
+                    String rut =
+                            JOptionPane.showInputDialog(
+                                    "Rut del guía:"
+                            );
+
+                    String calle =
+                            JOptionPane.showInputDialog(
+                                    "Calle:"
+                            );
+
+                    String comuna =
+                            JOptionPane.showInputDialog(
+                                    "Comuna:"
+                            );
+
                     String idioma =
                             JOptionPane.showInputDialog(
                                     "Idioma del guía:"
                             );
 
+                    Direccion direccion =
+                            new Direccion(
+                                    calle,
+                                    comuna
+                            );
+
                     gestor.agregarEntidad(
                             new GuiaTuristico(
                                     nombre,
+                                    rut,
+                                    direccion,
                                     idioma
                             )
                     );
@@ -189,6 +215,26 @@ public class Main {
 
                 case 5:
 
+                    ArrayList<Cliente> clientes =
+                            LectorClientes.cargarClientes(
+                                    "src/resources/clientes.txt"
+                            );
+
+                    for (Cliente cliente : clientes) {
+
+                        gestor.agregarEntidad(cliente);
+                    }
+
+                    JOptionPane.showMessageDialog(
+                            null,
+                            clientes.size()
+                                    + " clientes cargados correctamente desde el archivo."
+                    );
+
+                    break;
+
+                case 6:
+
                     JOptionPane.showMessageDialog(
                             null,
                             "Programa finalizado."
@@ -207,6 +253,6 @@ public class Main {
                     }
             }
 
-        } while (opcion != 5);
+        } while (opcion != 6);
     }
 }

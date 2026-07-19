@@ -1,17 +1,37 @@
 package model;
 
-public class GuiaTuristico implements Registrable {
+public class GuiaTuristico extends Persona {
 
-    private String nombre;
     private String idioma;
 
-    public GuiaTuristico(String nombre, String idioma) {
-        this.nombre = nombre;
+    public GuiaTuristico(
+            String nombre,
+            String rut,
+            Direccion direccion,
+            String idioma) {
+
+        super(nombre, rut, direccion);
+        this.idioma = idioma;
+    }
+
+    public String getIdioma() {
+        return idioma;
+    }
+
+    public void setIdioma(String idioma) {
         this.idioma = idioma;
     }
 
     @Override
     public String mostrarResumen() {
-        return "Guía: " + nombre + " | Idioma: " + idioma;
+        return "Guía: " + getNombre()
+                + " | Rut: " + getRut()
+                + " | Dirección: " + getDireccion()
+                + " | Idioma: " + idioma;
+    }
+
+    @Override
+    public String toString() {
+        return mostrarResumen();
     }
 }
